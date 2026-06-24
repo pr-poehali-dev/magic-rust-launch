@@ -7,7 +7,7 @@ const HERO_IMG = 'https://cdn.poehali.dev/projects/70457841-d076-4344-bb03-2107a
 
 const navItems = [
   { label: 'Главная', href: '#home' },
-  { label: 'Игры', href: '#games' },
+  { label: 'Серверы', href: '#games' },
   { label: 'Профиль', href: '#profile' },
   { label: 'Рейтинг', href: '#rating' },
   { label: 'О платформе', href: '#about' },
@@ -21,13 +21,13 @@ const stats = [
   { value: '99.9%', label: 'Аптайм', icon: 'Activity' },
 ];
 
-const games = [
-  { title: 'Astral Siege', genre: 'Стратегия', players: '24.5K', rating: 4.9, color: 'from-purple-600 to-fuchsia-600' },
-  { title: 'Neon Drift', genre: 'Гонки', players: '18.2K', rating: 4.7, color: 'from-violet-600 to-purple-700' },
-  { title: 'Shadow Realm', genre: 'RPG', players: '31.8K', rating: 4.8, color: 'from-indigo-600 to-violet-600' },
-  { title: 'Pulse Arena', genre: 'Шутер', players: '42.1K', rating: 5.0, color: 'from-fuchsia-600 to-purple-600' },
-  { title: 'Crystal Quest', genre: 'Приключение', players: '9.4K', rating: 4.6, color: 'from-purple-700 to-indigo-600' },
-  { title: 'Vortex Online', genre: 'MMO', players: '56.3K', rating: 4.9, color: 'from-violet-700 to-fuchsia-700' },
+const servers = [
+  { title: 'Phoenix Classic', mode: 'Классика', online: '187/200', wipe: 'Чт, 18:00', rating: 4.9, color: 'from-purple-600 to-fuchsia-600', icon: 'Server' },
+  { title: 'Phoenix Modded', mode: 'С модами', online: '142/150', wipe: 'Пн, 12:00', rating: 4.8, color: 'from-violet-600 to-purple-700', icon: 'Boxes' },
+  { title: 'Phoenix x2', mode: 'Ускоренный', online: '96/100', wipe: 'Ежедневно', rating: 4.7, color: 'from-indigo-600 to-violet-600', icon: 'Zap' },
+  { title: 'Phoenix Vanilla', mode: 'Ванила', online: '64/100', wipe: 'Чт, 18:00', rating: 4.6, color: 'from-fuchsia-600 to-purple-600', icon: 'Leaf' },
+  { title: 'Phoenix Hardcore', mode: 'Хардкор', online: '78/80', wipe: 'Вс, 20:00', rating: 5.0, color: 'from-purple-700 to-indigo-600', icon: 'Skull' },
+  { title: 'Phoenix PvE', mode: 'Мирный', online: '53/120', wipe: 'Без вайпов', rating: 4.7, color: 'from-violet-700 to-fuchsia-700', icon: 'Shield' },
 ];
 
 const achievements = [
@@ -141,26 +141,32 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Games */}
+      {/* Servers */}
       <section id="games" className="py-24 relative">
         <div className="container">
-          <SectionHeader badge="Каталог" title="Популярные игры" subtitle="Выбирай свою арену и поднимайся в рейтинге" />
+          <SectionHeader badge="Серверы" title="Наши Rust-серверы" subtitle="Выбирай режим по душе и заходи в игру" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {games.map((g) => (
-              <div key={g.title} className="group rounded-2xl border border-border bg-card overflow-hidden card-hover">
-                <div className={`h-40 bg-gradient-to-br ${g.color} relative flex items-center justify-center`}>
-                  <Icon name="Gamepad2" size={56} className="text-white/90 group-hover:scale-110 transition-transform" />
+            {servers.map((s) => (
+              <div key={s.title} className="group rounded-2xl border border-border bg-card overflow-hidden card-hover">
+                <div className={`h-40 bg-gradient-to-br ${s.color} relative flex items-center justify-center`}>
+                  <Icon name={s.icon} size={56} className="text-white/90 group-hover:scale-110 transition-transform" />
                   <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur text-xs text-white flex items-center gap-1">
-                    <Icon name="Star" size={12} className="text-yellow-400" /> {g.rating}
+                    <Icon name="Star" size={12} className="text-yellow-400" /> {s.rating}
+                  </span>
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-green-500/90 backdrop-blur text-xs text-white flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Online
                   </span>
                 </div>
                 <div className="p-5">
-                  <div className="text-xs text-primary font-medium mb-1">{g.genre}</div>
-                  <h3 className="font-display text-xl font-semibold mb-3">{g.title}</h3>
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1.5"><Icon name="Users" size={14} /> {g.players} онлайн</span>
-                    <Icon name="ChevronRight" size={18} className="text-primary group-hover:translate-x-1 transition-transform" />
+                  <div className="text-xs text-primary font-medium mb-1">{s.mode}</div>
+                  <h3 className="font-display text-xl font-semibold mb-3">{s.title}</h3>
+                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                    <span className="flex items-center gap-1.5"><Icon name="Users" size={14} /> {s.online}</span>
+                    <span className="flex items-center gap-1.5"><Icon name="RefreshCw" size={14} /> Вайп: {s.wipe}</span>
                   </div>
+                  <Button className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white font-medium">
+                    <Icon name="LogIn" size={16} className="mr-2" /> Подключиться
+                  </Button>
                 </div>
               </div>
             ))}
